@@ -11,15 +11,15 @@ namespace JustBlog.Model
         public string Title { get; set; }
         public string PostContent { get; set; }
         public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
-        public int UserId { get; set; }
+        public DateTime? UpdateTime { get; set; }
+        //public int UserId { get; set; }
         public string Tags { get; set; }
-        public int CategoryId { get; set; }
         public int Frequence { get; set; }
         public string FeaturedImage { get; set; }
-        public User User { get; set; }
+        public int CategoryId { get; set; }
+        //public User User { get; set; }
         public Category Category { get; set; }
-        public IEnumerable<Category> CategoryDetails { get; set; }
+        //public IEnumerable<Category> CategoryDetails { get; set; }
 
 
         // Slug generation taken from http://stackoverflow.com/questions/2920744/url-slugify-algorithm-in-c

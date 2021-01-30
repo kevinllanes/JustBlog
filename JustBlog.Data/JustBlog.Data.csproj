@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202101300048336_setfrequncetonullable.designer.cs">
       <DependentUpon>202101300048336_setfrequncetonullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101300143097_removeuserforpostpagefornow.cs" />
+    <Compile Include="Migrations\202101300143097_removeuserforpostpagefornow.designer.cs">
+      <DependentUpon>202101300143097_removeuserforpostpagefornow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101300048336_setfrequncetonullable.resx">
       <DependentUpon>202101300048336_setfrequncetonullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101300143097_removeuserforpostpagefornow.resx">
+      <DependentUpon>202101300143097_removeuserforpostpagefornow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

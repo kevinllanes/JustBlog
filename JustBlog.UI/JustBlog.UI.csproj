@@ -175,6 +175,7 @@
     <Content Include="Content\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\header.css" />
+    <Content Include="Content\Images\Noimageavailable.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

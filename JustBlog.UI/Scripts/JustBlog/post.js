@@ -7,6 +7,24 @@ $(document).off("click", "#blogPostTab").on("click", "#blogPostTab", function ()
     $('#cardDashboard').hide();
 });
 
+$(document).off("click", "#btnAddPost").on("click", "#btnAddPost", function () {
+    $('#PostTitle').text('Add Page');
+    $('#AddEditPost').modal({ backdrop: 'static', keyboard: false });
+});
+
+function displayImage(input) {
+    if (input.files && input.files[0]) {
+        var readFile = new FileReader();
+        readFile.onload = function (e) {
+            $('#imgDisplay')
+                .attr('src',e.target.result)
+                .width(240)
+                .height(150)
+        };
+        readFile.readAsDataURL(input.files[0]);
+    }
+}
+
 function PopulatePostList() {
     $.ajax({
         url: '/Blog/BLog/LoadPostTab',
@@ -17,15 +35,17 @@ function PopulatePostList() {
             var columns = [
                 {
                     "className": "hide_column",
-                    title: "Title", data: "PageId",
+                    title: "PostId", data: "PostId",
                     render: function (data, type, full) {
-                        return '<input id="hdnPageId" type="hidden" value="' + full.PageId + '" />'
+                        return '<input id="hdnPostId" type="hidden" value="' + full.PostId + '" />'
                     }
                 },
                 {
                     title: "Title", data: "Title"
                 },
-                { title: "Content", data: "PagesContent" },
+                { title: "Content", data: "PostContent" },
+                { title: "Frequence", data: "Frequence" },
+                { title: "Comment", data: "Comment" },
                 {
                     title: "Date Created", data: "CreateTime",
                     render: function (data, type, full) {

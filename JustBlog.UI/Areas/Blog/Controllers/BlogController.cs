@@ -99,6 +99,47 @@ namespace JustBlog.UI.Areas.Blog.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        public ActionResult AddorUpdatePost(Post viewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var model = new Post
+                    {
+                        PostId = viewModel.PostId,
+                        Title = viewModel.Title,
+                        PostContent = viewModel.PostContent,
+                        CreateTime = DateTime.Now,
+                        Tags = viewModel.Tags,
+                        Frequence = viewModel.Frequence,
+                        FeaturedImage = viewModel.FeaturedImage,
+                        CategoryId = viewModel.CategoryId
+                    };
+                    var id = _unitOfWork.postRepository.FindById(model.PostId);
+                    if (id != null)
+                    {
+                        _unitOfWork.postRepository.Detach(id);
+                        _unitOfWork.postRepository.Update(model);
+                        _unitOfWork.Complete();
+                    }
+                    else
+                    {
+                        _unitOfWork.postRepository.Add(model);
+                        _unitOfWork.Complete();
+                    }
+                }
+                return new EmptyResult();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region CategoryTab
