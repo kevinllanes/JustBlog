@@ -1,0 +1,140 @@
+﻿<style>
+    #pageListTable_filter {
+        float: right !important;
+    }
+
+    #pageListTable_paginate {
+        float: right !important;
+    }
+
+    .hide_column {
+        display: none;
+    }
+</style>
+<main class="page-content">
+    <div class="container-fluid">
+        <h5>
+            Dashboard
+            <small class="text-muted">Version 1.0</small>
+        </h5>
+        <hr id="headerhr" />
+        <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="#"><i class="fa fa-home"> Home</i></a>
+            <span class="breadcrumb-item active"><i class="fa fa-dashboard"> Dashboard</i></span>
+        </nav>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div id="cardDashboard">
+                        <div class="card-header">
+                            Dashboard
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                    <div id="cardPage">
+                        <div class="card-header">
+                            Page List
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <button type="button" id="btnAddPage" class="btn btn-primary" style="margin-left:10px;">Create Page</button>
+                            </div>
+                            <div id="blogPage" style="overflow: auto">
+                                <table id="pageListTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;overflow-x:auto;" cellspacing="0"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cardPost">
+                        <div class="card-header">
+                            Post List
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <button type="button" id="btnAddPage" class="btn btn-primary" style="margin-left:10px;">Create Post</button>
+                            </div>
+                            <div id="blogPost" style="overflow: auto">
+                                <table id="postListTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;overflow-x:auto;" cellspacing="0"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cardCategory">
+                        <div class="card-header">
+                            Category List
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <button type="button" id="btnAddPage" class="btn btn-primary" style="margin-left:10px;">Create Category</button>
+                            </div>
+                            <div id="blogCategory" style="overflow: auto">
+                                <table id="categoryListTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;overflow-x:auto;" cellspacing="0"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="AddEditPage" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="PageTitle">Add Page</h5>
+                <button type="button" id="btnPageClose" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="pageId" class="form-control" />
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="content" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnPageClose1" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSavePage">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="AddEditCategory" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="PageTitle">Add Category</h5>
+                <button type="button" id="btnCategoryClose" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="categoryId" class="form-control" />
+                <div class="form-group">
+                    <label for="title">Category</label>
+                    <input type="text" class="form-control" id="category" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                    <label for="content">Description</label>
+                    <textarea class="form-control" id="categoryDescription" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnCategoryClose1" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSaveCategory">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+

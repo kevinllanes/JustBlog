@@ -1,0 +1,152 @@
+﻿* {
+    box-sizing: border-box;
+}
+/*Global Classes*/
+.fontNoto {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.tColorY {
+    color: #ffcc33;
+}
+
+.tColorW {
+    color: #ffffff;
+}
+/*SVG Icon*/
+.icon {
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    margin-bottom: -2px;
+    margin-left: 5px;
+}
+/*Body Grid Container*/
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.gridContain {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 23px;
+    width: 100vw;
+    height: 100vh;
+}
+
+#imgWrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#backImg {
+    z-index: 0;
+    width: 150%;
+}
+
+#overlay {
+    grid-column: 1/ span 8;
+    grid-row: 1/span 5;
+    z-index: 1;
+    opacity: 0;
+    background-color: #000000;
+}
+/**Content Configuration**/
+.contentContain {
+    grid-column: 2/span 3;
+    grid-row: 2/span 3;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 50px 15px repeat(3, auto);
+    column-gap: 8px;
+    row-gap: 5px;
+}
+
+.breaker {
+    grid-column: 1;
+    grid-row: 1/span 6;
+    border-left: 10px solid #ffcc33;
+    height: 85%;
+    align-self: center;
+    opacity: 0;
+}
+
+.contentContain p {
+    margin: 0;
+}
+
+#topEle, #titleEle, #textEle, #viewButton {
+    margin-left: -25px;
+    opacity: 0;
+}
+
+#topEle {
+    grid-column: 3/span 3;
+    grid-row: 2;
+    font-size: 1.3rem;
+    align-self: end;
+}
+
+#icon {
+    grid-column: 2;
+    grid-row: 2;
+    margin-bottom: 6px;
+    align-self: end;
+    justify-self: center;
+    margin-left: -50px;
+    opacity: 0;
+}
+
+#titleEle {
+    grid-column: 2/span 4;
+    grid-row: 3;
+    margin-top: 0;
+    margin-bottom: 0;
+    align-self: center;
+    font-size: 3.5rem;
+}
+
+#textEle {
+    grid-column: 2/ span 4;
+    grid-row: 4;
+    width: 450px;
+    font-size: 1.1rem;
+}
+
+#viewButton {
+    grid-column: 2/span 4;
+    grid-row: 5;
+    padding: 10px 12px;
+    width: 131px;
+    background-color: #ffcc33;
+    color: #000000;
+    justify-self: start;
+    align-self: start;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#linkArrow {
+    opacity: 0;
+    display: none;
+}
+
+@media only screen and (max-width: 758px) {
+    .contentContain {
+        grid-column: 1/ span 5;
+    }
+
+    #titleEle {
+        font-size: 2.5rem;
+    }
+
+    #textEle {
+        font-size: .8rem;
+    }
+}
