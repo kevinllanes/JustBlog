@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checksheet Columns</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .column-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #dee2e6;
+            background-color: #f8f9fa;
+            cursor: move;
+        }
+        .column-item.hidden {
+            background-color: #f8d7da;
+        }
+        .column-item:hover {
+            background-color: #e9ecef;
+        }
+        .visibility-icon {
+            cursor: pointer;
+            color: #6c757d;
+        }
+        .d-none {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="card-title mb-0">Checksheet Columns</h5>
+                <p class="text-muted small mb-0">Label Common Checksheet</p>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="form-control"
+                        placeholder="Search"
+                        onkeyup="filterList()"
+                    >
+                </div>
+                <div class="d-flex mb-3">
+                    <button class="btn btn-primary mr-2">
+                        <i class="fa fa-plus"></i> Add
+                    </button>
+                    <button class="btn btn-warning text-white mr-2">
+                        <i class="fa fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="fa fa-trash"></i> Delete
+                    </button>
+                </div>
+                <span class="text-primary font-weight-bold" id="active-columns-count"></span>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="text-muted small mb-0">Shown</p>
+                    <button class="btn btn-link text-muted p-0" onclick="hideAll()">Hide All</button>
+                </div>
+
+                <ul id="visible-list" class="list-unstyled">
+                    <li class="column-item">
+                        <span>Item No.</span>
+                        <i class="fa fa-eye visibility-icon" onclick="toggleVisibility(this)"></i>
+                    </li>
+                    <li class="column-item">
+                        <span>Lot No.</span>
+                        <i class="fa fa-eye visibility-icon" onclick="toggleVisibility(this)"></i>
+                    </li>
+                    <li class="column-item">
+                        <span>Plan Date</span>
+                        <i class="fa fa-eye visibility-icon" onclick="toggleVisibility(this)"></i>
+                    </li>
+                    <li class="column-item">
+                        <span>Plan Qty</span>
+                        <i class="fa fa-eye visibility-icon" onclick="toggleVisibility(this)"></i>
+                    </li>
+                    <li class="column-item">
+                        <span>Destination</span>
+                        <i class="fa fa-eye visibility-icon" onclick="toggleVisibility(this)"></i>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <p class="text-muted small mb-0">Hidden Columns</p>
+                    <button class="btn btn-link text-muted p-0" onclick="showAll()">Show All</button>
+                </div>
+                <ul id="hidden-list" class="list-unstyled"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script>
+        // Toggle visibility and move item between lists
+        function toggleVisibility(icon) {
+            const columnItem = icon.closest('.column-item');
+            const isHidden = columnItem.parentElement.id === 'visible-list';
+
+            if (isHidden) {
+                // Move to hidden list
+                document.getElementById('hidden-list').appendChild(columnItem);
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                // Move to visible list
+                document.getElementById('visible-list').appendChild(columnItem);
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+
+            // Update active columns count
+            updateActiveColumnsCount();
+        }
+
+        // Filter list based on search input
+        function filterList() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const visibleItems = document.querySelectorAll("#visible-list .column-item");
+            const hiddenItems = document.querySelectorAll("#hidden-list .column-item");
+
+            [...visibleItems, ...hiddenItems].forEach((item) => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchInput)) {
+                    item.classList.remove("d-none");
+                } else {
+                    item.classList.add("d-none");
+                }
+            });
+        }
+
+        // Initialize Sortable.js for drag-and-drop functionality
+        new Sortable(document.getElementById('visible-list'), {
+            group: 'columns',
+            animation: 150,
+            onEnd(evt) {
+                console.log("Moved item:", evt.item);
+            }
+        });
+
+        new Sortable(document.getElementById('hidden-list'), {
+            group: 'columns',
+            animation: 150,
+            onEnd(evt) {
+                console.log("Moved item:", evt.item);
+            }
+        });
+
+        // Function to move all items from visible list to hidden list
+        function hideAll() {
+            const visibleItems = document.querySelectorAll("#visible-list .column-item");
+            visibleItems.forEach((item) => {
+                document.getElementById('hidden-list').appendChild(item);
+                const icon = item.querySelector('.visibility-icon');
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            });
+
+            // Update active columns count after hiding all
+            updateActiveColumnsCount();
+        }
+
+        // Function to move all items from hidden list to visible list
+        function showAll() {
+            const hiddenItems = document.querySelectorAll("#hidden-list .column-item");
+            hiddenItems.forEach((item) => {
+                document.getElementById('visible-list').appendChild(item);
+                const icon = item.querySelector('.visibility-icon');
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            });
+
+            // Update active columns count after showing all
+            updateActiveColumnsCount();
+        }
+
+        // Update the active columns count based on the visible list
+        function updateActiveColumnsCount() {
+            const visibleItems = document.querySelectorAll("#visible-list .column-item");
+            const activeColumnsCount = visibleItems.length;
+            document.getElementById("active-columns-count").textContent = `${activeColumnsCount} active columns`;
+        }
+    </script>
+</body>
+</html>
